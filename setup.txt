@@ -1,0 +1,47 @@
+HOW TO RUN THE APPLICATION
+
+Step 1
+
+First, get XAMPP. You’ll need to get an appropriate version 
+for your operating system from the Apache Friends’ official site.
+
+Step 2
+
+Next, you should install XAMPP on your computer. The most common practice is to install it on 
+the C drive
+To install XAMPP
+double-click on the installer file you downloaded. 
+Click on the Run button to start the installation. 
+Follow the installation wizard to complete the installation. 
+In the Select Components section, you can opt to leave some components 
+out if you’re sure you won’t need them. However, it is recommended to 
+keep everything as is and install the full version.
+
+The default location is C:\xampp.
+
+Step 3
+
+In this step, you’ll create the project folder where you’ll save the PHP file
+To do that, go to your XAMPP folder. 
+your copy of XAMPP is installed on the C drive.
+
+Once you get to the XAMPP’s main folder, go to the htdocs folder. There, create a new folder 
+and name it after the file you’ll copy into it. Alternatively, 
+you can name it “NewProject,” “Project 1,” or give it any other name.
+
+Step 4
+Launch XAMPP. You can open it via the status bar icon or search for it in the 
+Start menu if you’re on a Windows computer.
+Once the app opens, you will see its Control Panel. Click on the Start button in the Apache row. 
+This will launch the Apache server. 
+The Apache label in the Module column will turn green and you’ll see a message in 
+the log at the bottom of the Control Panel informing you that the server is running.
+
+Now, open your browser and type “localhost” into the address bar (omit the quotations).
+You should see the “localhost – Welcome to XAMPP” option right below the address bar. 
+Click on it.
+You will be redirected to localhost/dashboard. Replace the dashboard part with the 
+name of the folder where your PHP file is located. In our case it looks like this: 
+localhost/NewProject.
+You will see the list of files in the said directory. Click on your PHP file.
+If everything’s OK, you should see your PHP file open in your browser.
