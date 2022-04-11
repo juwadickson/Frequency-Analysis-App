@@ -36,6 +36,7 @@ def main() -> None:
                         pattern = "^([A-Z](:)[a-z](,)?)+"
                         charMapping = {}
                         Arr = []
+
                         if(re.fullmatch(pattern,replacementRule)):
                             ruleArr = re.split(",",replacementRule) # Create a list of Rule Pairs by removing the comma
                             for rule in ruleArr:
@@ -43,79 +44,87 @@ def main() -> None:
                                 # Dictionary to check if Cipher Text Char contains all alphabet
                                 for letter in ruleSplit:
                                     Arr.append(letter) # Append each letter in the rule pair to check for duplicate value
-                                for char in Arr:
-                                    if countOf(Arr, char) > 1:
-                                        print("\t*** Invalid Replacement Rule ***\n")
-                                        print("%s appears more than once"%(char))
-                                        format_info()
-                                        format = True
-                                        break
-                                    else:
-                                        # return the mapping after succesful verification
-                                        charMapping[ruleSplit[0]] = ruleSplit[1]
-                                        format = False
-                            
-                        else:
-                            print("\t*** Invalid Replacement Rule ***")
-                            format_info()
-                            format = True
-                        
-                        
-                        """ Check if All Characters have been  Visited in The Replacement Rule"""
-                        letterVisited = ""
-                        for key in charMapping:
-                            letterVisited += key
-                        
-                        if check_rule_ispangram(letterVisited) == False:
-                            proceedFlag = True
-                            while proceedFlag:
-                                try:
-                                    print("\t*** The Cipher Text Char in Replacement Rule does not contain all Alphabet ***")
-                                    print("Option: \n1 to continue with Replacement Rule\n2 to Enter a New Replacement Rule\n3 to exit program ***")
-                                    proceed = int(input("Proceed> "))
-                                    if proceed == 1:
-                                        # Action on replacement rule Begin Here
-                                        plainTextContent = ""
-                                        for cipherLetter in content:
-                                            if cipherLetter.isspace():
-                                                plainTextContent += cipherLetter
-                                            elif not cipherLetter.isalnum():
-                                                plainTextContent += cipherLetter
-                                            else:
-                                                count = 0
-                                                for key in charMapping:
-                                                    plainTextChar = charMapping[key]
-                                                    
-                                                    if cipherLetter == key:
-                                                        plainTextContent += plainTextChar
-                                                        break
-                                                    else:
-                                                        count += 1
-                                                if count == len(charMapping):
-                                                    plainTextContent += cipherLetter
-                                                    count = 0
-                                        """ After Verification of Replacement Rule Perform Action on Cipher Text"""
-                                        print("\nCipher Text :\n")
-                                        print(content)
-                                        analysis(content)
-                                        print("\n\nPlain Text: \n\n")
-                                        # Plain Text Result of Replacement rule is displayed here
-                                        print(plainTextContent)
-                                        # Action on replacement rule Ends Here
-                                        # ***********************
-                                        proceedFlag = False
-                                    elif proceed == 2:
-                                        proceedFlag = False
-                                        format = True
+                            for char in Arr:
+                                if countOf(Arr, char) > 1:
+                                    print("\n\t*** Invalid Replacement Rule ***\n")
+                                    print("%s appears more than once"%(char))
+                                    format_info()
+                                    format = False
+                                    flag = True
+                                    break
+                                else:
+                                    # return the mapping after succesful verification
+                                    charMapping[ruleSplit[0]] = ruleSplit[1]
 
-                                    elif proceed == 3:
-                                        proceedFlag = False
-                                        flag = False
-                                        exit()
-                                except ValueError:
-                                    print("\n\t*** ValueError: Invalid Input, Integer Required ***\n\n")
+                            if(charMapping):
+                                """ Check if All Characters have been  Visited in The Replacement Rule"""
+                                letterVisited = ""
+                                for key in charMapping:
+                                    letterVisited += key
+                                
+                                if check_rule_ispangram(letterVisited) == False:
                                     proceedFlag = True
-                            
+                                    while proceedFlag:
+                                        try:
+                                            print("\t*** The Cipher Text Char in Replacement Rule does not contain all Alphabet ***")
+                                            print("Option: \n1 to continue with Replacement Rule\n2 to Enter a New Replacement Rule\n3 to exit program ***")
+                                            proceed = int(input("Proceed> "))
+                                            if proceed == 1:
+                                                # Action on replacement rule Begin Here
+                                                plainTextContent = ""
+                                                for cipherLetter in content:
+                                                    if cipherLetter.isspace():
+                                                        plainTextContent += cipherLetter
+                                                    elif not cipherLetter.isalnum():
+                                                        plainTextContent += cipherLetter
+                                                    else:
+                                                        count = 0
+                                                        for key in charMapping:
+                                                            plainTextChar = charMapping[key]
+                                                            
+                                                            if cipherLetter == key:
+                                                                plainTextContent += plainTextChar
+                                                                break
+                                                            else:
+                                                                count += 1
+                                                        if count == len(charMapping):
+                                                            plainTextContent += cipherLetter
+                                                            count = 0
+                                                """ After Verification of Replacement Rule Perform Action on Cipher Text"""
+                                                print("\nCipher Text :\n")
+                                                print(content)
+                                                analysis(content)
+                                                print("\n\nPlain Text: \n\n")
+                                                # Plain Text Result of Replacement rule is displayed here
+                                                print(plainTextContent)
+                                                # Action on replacement rule Ends Here
+                                                # ***********************
+                                                proceedFlag = False
+                                                format = False
+                                                flag = True
+                                            elif proceed == 2:
+                                                proceedFlag = False
+                                                format = True
+                                            elif proceed == 3:
+                                                proceedFlag = False
+                                                flag = False
+                                                exit()
+                                            else:
+                                                print("\n*** Invalid Option Selected ***")
+                                                proceedFlag = False
+                                                format = True
+                                        except ValueError:
+                                            print("\n\t*** ValueError: Invalid Input, Integer Required ***\n\n")
+                                            proceedFlag = False
+                                            format = True       
+
+                        else:
+                            print("\n\t*** Invalid Replacement Rule ***\n")
+                            format_info()
+                            format = False
+                            flag = True
+                        
+                        
                 elif optionValue == 2:
                     flag = False
                     exit() 
@@ -158,9 +167,9 @@ def analysis(contents: str):
 
 def format_info():
     print("\n******** REPLACEMENT RULE FORMAT *********\n")
-    print("Cipher Text Char:Plain Text Char. Input pairs should be seperated by a comma")
-    print("Cipher Text Char and Plain Text Char should not occur more than once")
-    print("Format: M:a,B:c,C:d .....")
+    print("* Cipher Text Char:Plain Text Char.\n* Input pairs should be seperated by a comma\n")
+    print("* Cipher Text Char and Plain Text Char should not occur more than once")
+    print("* Format: M:a,B:c,C:d .....")
     print("\n******** REPLACEMENT RULE FORMAT *********\n")
 
 """ Function to check if Cipher Text in Replacement Rule contains all alphabet"""
