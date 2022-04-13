@@ -3,7 +3,7 @@ TOPIC: FREQUENCY ANALYSIS APPLICATION
 DESCRIPTION: 
 Frequency analysis is based on the fact that, in any given stretch of written language, certain letters and combinations of letters occur with varying frequencies. This application help crypto analyst to make frequency analysis on cipher text.
 
-This Application has no GUI, it runs in a command line and takes one arguments (cipher.txt) as input.
+This Application has no GUI, it is a command line application and takes one arguments (cipher.txt) as input.
 
 After application run it analyze cipher.txt and give statistic of chars at the same screen.
 it then displays an Option:
