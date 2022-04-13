@@ -2,7 +2,7 @@ from operator import countOf
 import re
 import sys
 from typing import List, Dict
-
+# This is my second commit
 def main() -> None:
     """ Entrypoint of program run as module """
 
